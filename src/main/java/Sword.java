@@ -1,4 +1,19 @@
-package PACKAGE_NAME;
+public class Sword extends MeleeWeapon {
 
-public class Sword {
+    private double typeFee;
+    private String swordType;
+
+    public Sword(String type, String material, double basePrice, boolean isInlaid, String swordType, double typeFee) {
+        super(type, material, basePrice, isInlaid);
+        this.swordType = swordType;
+        this.typeFee = typeFee;
+    }
+
+    @Override
+    public double getPrice() {
+
+        return 0;
+    }
+
+
 }
