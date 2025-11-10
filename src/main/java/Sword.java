@@ -1,10 +1,14 @@
 public class Sword extends MeleeWeapon {
 
+    protected String weaponType;
     protected String swordType;
+    protected RecordKeeper records;
 
-    public Sword(double basePrice, String material, boolean isInlaid, String gemType, String swordType) {
+    public Sword(double basePrice, String material, boolean isInlaid, String gemType, String weaponType, String swordType, RecordKeeper records) {
         super(basePrice, material, isInlaid, gemType);
+        this.weaponType = weaponType;
         this.swordType = swordType;
+        this.records = records;
     }
 
     public String getMaterial() {
@@ -18,8 +22,12 @@ public class Sword extends MeleeWeapon {
 
     @Override
     public double getBasePrice() {
-
         return this.basePrice;
+    }
+
+    @Override
+    public double getTotalPrice() {
+        return records.getReadPrice("Material", this.getMaterial(), this.swordType) + this.getBasePrice() + (isInlaid ? records.getReadPrice("Upgrade", this.gemType, "Inlay") : 0);
     }
 
 

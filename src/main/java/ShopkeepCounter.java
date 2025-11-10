@@ -42,6 +42,7 @@ public class ShopkeepCounter {
 
     private void processSwordCreationRequest() {
 
+        String weaponType = "Sword";
         String swordMaterial = "";
         String swordType = "";
         String gemType = "";
@@ -107,9 +108,8 @@ public class ShopkeepCounter {
             }
         }
 
-        Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", "Iron", swordType), swordMaterial, isInlaid, gemType, swordType);
-        double finalPrice = recordKeeper.getReadPrice("Material", swordMaterial, swordType) + sword.getBasePrice() + (isInlaid ? recordKeeper.getReadPrice("Upgrade", gemType, "Inlay") : 0);
-        System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?",finalPrice);
+        Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", "Iron", swordType), swordMaterial, isInlaid, gemType, weaponType, swordType, recordKeeper);
+        System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?",sword.getTotalPrice());
 
         userInput = 0;
         while (!(userInput == 99)) {

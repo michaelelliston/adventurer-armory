@@ -14,10 +14,13 @@ public class RecordKeeper {
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pricesFileName))) {
 
-            bufferedReader.readLine(); // Skips over the header of the prices file, while also attempting to make sure the line variable won't be null.
-            bufferedReader.readLine();
+            bufferedReader.readLine(); // Skips over the header of the prices file
             String line;
             while ((line = bufferedReader.readLine()) != null) {
+
+                if (line.startsWith("#")) { // Skips to the next line if a line starts with "#", allowing non-price information to be skipped.
+                    continue;
+                }
 
                 String[] parts = line.split("\\|");
 

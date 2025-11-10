@@ -1,9 +1,25 @@
 public class Axe extends MeleeWeapon {
 
     protected String axeType;
+    protected RecordKeeper records;
 
-    public Axe(double basePrice, String material, boolean isInlaid, String gemType, String axeType) {
+    public Axe(double basePrice, String material, boolean isInlaid, String gemType, String axeType, RecordKeeper records) {
         super(basePrice, material, isInlaid, gemType);
         this.axeType = axeType;
+        this.records = records;
+    }
+
+    public String getMaterial() {
+        return this.material;
+    }
+
+    @Override
+    public double getBasePrice() {
+        return this.basePrice;
+    }
+
+    @Override
+    public double getTotalPrice() {
+        return records.getReadPrice("Material", this.getMaterial(), this.axeType) + this.getBasePrice() + (isInlaid ? records.getReadPrice("Upgrade", this.gemType, "Inlay") : 0);
     }
 }
