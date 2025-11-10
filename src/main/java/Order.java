@@ -37,10 +37,10 @@ public class Order {
         this.orderNumber = orderNumber;
     }
 
-    @Override
-    public String toString() {
-
-        return "";
+    public void displayItemsInOrder() {
+        for (Priceable item : purchases) {
+            System.out.println(item);
+        }
     }
 }
 

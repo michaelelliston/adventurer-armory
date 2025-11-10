@@ -30,5 +30,10 @@ public class Sword extends MeleeWeapon {
         return records.getReadPrice("Material", this.getMaterial(), this.swordType) + this.getBasePrice() + (isInlaid ? records.getReadPrice("Upgrade", this.gemType, "Inlay") : 0);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s made of %s with an inlay of %s, priced at: $%.2f", this.getType(), this.getMaterial(), this.getGemType(), this.getTotalPrice());
+    }
+
 
 }
