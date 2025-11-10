@@ -2,15 +2,24 @@ public class Sword extends MeleeWeapon {
 
     protected String swordType;
 
-    public Sword(String material, boolean isInlaid, String swordType) {
-        super(material, isInlaid);
+    public Sword(double basePrice, String material, boolean isInlaid, String gemType, String swordType) {
+        super(basePrice, material, isInlaid, gemType);
         this.swordType = swordType;
     }
 
-    @Override
-    public double getPrice() {
+    public String getMaterial() {
+        return this.material;
+    }
 
-        return 0;
+    public String getType() {
+        return this.swordType;
+    }
+
+
+    @Override
+    public double getBasePrice() {
+
+        return this.basePrice;
     }
 
 

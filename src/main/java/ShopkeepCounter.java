@@ -12,6 +12,14 @@ public class ShopkeepCounter {
         recordKeeper.readPricesFromRecords();
     }
 
+    public void greetCustomer() {
+        String userName = InputGetter.getString("What's your name?");
+//        int orderNumber = recordKeeper.getOrderNumber();
+        int orderNumber= 73;
+        currentOrder = new Order(userName, orderNumber);
+        openShop();
+    }
+
     // Begin prompting user for input from selections
     public void openShop() {
         startRecordKeeper();
@@ -22,7 +30,8 @@ public class ShopkeepCounter {
                 \t2) Axe
                 
                 
-                What are you buying?""");
+                What are you buying?
+                """);
 
         switch (userInput) {
             case 1 -> processSwordCreationRequest();
@@ -35,10 +44,11 @@ public class ShopkeepCounter {
 
         String swordMaterial = "";
         String swordType = "";
+        String gemType = "";
         boolean isInlaid = false;
         int userInput = 0;
 
-        while (!(userInput == 1) || (!(userInput == 2)) || (!(userInput == 3))) {
+        while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3))) {
 
             userInput = InputGetter.getInt("""
                     \n
@@ -47,7 +57,8 @@ public class ShopkeepCounter {
                     \t3) Greatsword
                     
                     
-                    What kind?""");
+                    What kind?
+                    """);
 
             switch (userInput) {
                 case 1 -> swordType = "Shortsword";
@@ -55,35 +66,64 @@ public class ShopkeepCounter {
                 case 3 -> swordType = "Greatsword";
             }
         }
-        userInput = InputGetter.getInt("""
-                \n
-                \t1) Iron
-                \t2) Steel
-                \t3) Mithral
-                \t4) Adamantine
-                
-                What material?""");
 
-        switch (userInput) {
-            case 1 -> swordMaterial = "Iron";
-            case 2 -> swordMaterial = "Steel";
-            case 3 -> swordMaterial = "Mithral";
-            case 4 -> swordMaterial = "Adamantine";
+        userInput = 0;
+        while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4))) {
+
+            userInput = InputGetter.getInt("""
+                    \n
+                    \t1) Iron
+                    \t2) Steel
+                    \t3) Mithral
+                    \t4) Adamantine
+                    
+                    What material?
+                    """);
+
+            switch (userInput) {
+                case 1 -> swordMaterial = "Iron";
+                case 2 -> swordMaterial = "Steel";
+                case 3 -> swordMaterial = "Mithral";
+                case 4 -> swordMaterial = "Adamantine";
+            }
         }
 
-        userInput = InputGetter.getInt("""
-                \n
-                \t1) Yes
-                \t2) No
-                
-                Want a gem inlaid into it?""");
+        userInput = 0;
+        while (!(userInput == 1) && (!(userInput == 2))) {
 
-        if (userInput == 1) {
-            isInlaid = true;
-            String gem = processGemInlayRequest();
+            userInput = InputGetter.getInt("""
+                    \n
+                    \t1) Yes
+                    \t2) No
+                    
+                    Want a gem inlaid into it?
+                    """);
+
+            if (userInput == 1) {
+                isInlaid = true;
+                gemType = processGemInlayRequest();
+            } else {
+                gemType = "None";
+            }
         }
 
-        Sword sword = new Sword(swordMaterial, isInlaid, swordType);
+        Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", "Iron", swordType), swordMaterial, isInlaid, gemType, swordType);
+        double finalPrice = recordKeeper.getReadPrice("Material", swordMaterial, swordType) + sword.getBasePrice() + (isInlaid ? recordKeeper.getReadPrice("Upgrade", gemType, "Inlay") : 0);
+        System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?",finalPrice);
+
+        userInput = 0;
+        while (!(userInput == 99)) {
+            userInput = InputGetter.getInt("""
+                                        \n
+                                        1) Yes
+                                        99) No
+                                        """);
+
+            switch (userInput) {
+                case 1 -> currentOrder.addPurchase(sword);
+                case 99 -> openShop();
+            }
+        }
 
 
     }
@@ -92,17 +132,17 @@ public class ShopkeepCounter {
         String selection = "";
         int userInput = 0;
 
-        while (!(userInput == 99)) {
+        while (!(userInput == 99) && (!(userInput == 1)) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4)) && (!(userInput == 5)) && (!(userInput == 6))){
 
-            System.out.printf("\n1) Amethyst: $%.2f", recordKeeper.getReadPrice("Upgrade", "Inlay", "Amethyst"));
-            System.out.printf("\n2) Garnet: $%.2f", recordKeeper.getReadPrice("Upgrade", "Inlay", "Garnet"));
-            System.out.printf("\n3) Emerald: $%.2f", recordKeeper.getReadPrice("Upgrade", "Inlay", "Emerald"));
-            System.out.printf("\n4) Citrine: $%.2f", recordKeeper.getReadPrice("Upgrade", "Inlay", "Citrine"));
-            System.out.printf("\n5) Sapphire: $%.2f", recordKeeper.getReadPrice("Upgrade", "Inlay", "Sapphire"));
-            System.out.printf("\n6) Diamond: $%.2f", recordKeeper.getReadPrice("Upgrade", "Inlay", "Diamond"));
-            System.out.println("99) Nevermind, nothing.");
+            System.out.printf("\n1) Amethyst: $%.2f", recordKeeper.getReadPrice("Upgrade", "Amethyst", "Inlay"));
+            System.out.printf("\n2) Garnet: $%.2f", recordKeeper.getReadPrice("Upgrade", "Garnet", "Inlay"));
+            System.out.printf("\n3) Emerald: $%.2f", recordKeeper.getReadPrice("Upgrade", "Emerald", "Inlay"));
+            System.out.printf("\n4) Citrine: $%.2f", recordKeeper.getReadPrice("Upgrade", "Citrine", "Inlay"));
+            System.out.printf("\n5) Sapphire: $%.2f", recordKeeper.getReadPrice("Upgrade", "Sapphire", "Inlay"));
+            System.out.printf("\n6) Diamond: $%.2f", recordKeeper.getReadPrice("Upgrade", "Diamond", "Inlay"));
+            System.out.println("\n99) Nevermind, nothing.");
 
-            userInput = InputGetter.getInt("Which gem would you like?");
+            userInput = InputGetter.getInt("Which gem would you like?\n");
 
 
             switch (userInput) {
@@ -112,8 +152,8 @@ public class ShopkeepCounter {
                 case 4 -> selection = "Citrine";
                 case 5 -> selection = "Sapphire";
                 case 6 -> selection = "Diamond";
+                case 99 -> selection = "None";
             }
-
         }
         return selection;
     }

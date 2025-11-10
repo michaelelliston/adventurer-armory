@@ -26,9 +26,9 @@ Material|Adamantine|Greatsword|300.00
 Material|Adamantine|Hatchet|80.00
 Material|Adamantine|Broadaxe|140.00
 Material|Adamantine|Greataxe|240.00
-Upgrade|Inlay|Amethyst|100.00
-Upgrade|Inlay|Garnet|120.00
-Upgrade|Inlay|Emerald|130.00
-Upgrade|Inlay|Citrine|190.00
-Upgrade|Inlay|Sapphire|270.00
-Upgrade|Inlay|Diamond|400.00
+Upgrade|Amethyst|Inlay|100.00
+Upgrade|Garnet|Inlay|120.00
+Upgrade|Emerald|Inlay|130.00
+Upgrade|Citrine|Inlay|190.00
+Upgrade|Sapphire|Inlay|270.00
+Upgrade|Diamond|Inlay|400.00

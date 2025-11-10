@@ -1,5 +1,5 @@
 public interface Priceable {
 
-    double getPrice();
+    double getBasePrice();
 
 }

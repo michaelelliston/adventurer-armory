@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class RecordKeeper {
 
-    private final String pricesFileName = "src/main/resources/records.json";
+    private final String pricesFileName = "src/main/resources/prices.csv";
     private HashMap<String, Double> itemPrices;
 
     public void readPricesFromRecords() {
@@ -14,14 +14,10 @@ public class RecordKeeper {
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pricesFileName))) {
 
-            String line = bufferedReader.readLine(); // Skips over the header of the prices file, while also attempting to make sure the line variable won't be null.
-            while (line != null) {
-
-                line = bufferedReader.readLine().trim();
-
-                if (line == null || line.startsWith("#")) {
-                    continue;
-                }
+            bufferedReader.readLine(); // Skips over the header of the prices file, while also attempting to make sure the line variable won't be null.
+            bufferedReader.readLine();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
 
                 String[] parts = line.split("\\|");
 
@@ -47,6 +43,6 @@ public class RecordKeeper {
 
         String key = category + "|" + material + "|" + type;
 
-        return itemPrices.getOrDefault(key, 0.0); // Returns the key's value within the hashmap, but if it doesn't exist, returns 0.0 instead.
+        return itemPrices.get(key); // Returns the key's value within the hashmap, but if it doesn't exist, returns 0.0 instead.
     }
 }
