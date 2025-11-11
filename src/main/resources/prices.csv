@@ -1,13 +1,17 @@
 Category|Material|Type|Price
 #Iron is currently used as the Base price for this shop.
-Weapon|Iron|Shortsword|80.00
-Weapon|Iron|Longsword|120.00
-Weapon|Iron|Greatsword|230.00
-Weapon|Iron|Hatchet|50.00
-Weapon|Iron|Broadaxe|90.00
-Weapon|Iron|Greataxe|150.00
-Weapon|Iron|Axe|50.00
-Weapon|Iron|Sword|80.00
+Weapon|Base|Shortsword|80.00
+Weapon|Base|Longsword|120.00
+Weapon|Base|Greatsword|230.00
+Weapon|Base|Hatchet|50.00
+Weapon|Base|Broadaxe|90.00
+Weapon|Base|Greataxe|150.00
+Material|Iron|Shortsword|00.00
+Material|Iron|Longsword|00.00
+Material|Iron|Greatsword|00.00
+Material|Iron|Hatchet|00.00
+Material|Iron|Broadaxe|00.00
+Material|Iron|Greataxe|00.00
 Material|Steel|Shortsword|30.00
 Material|Steel|Longsword|40.00
 Material|Steel|Greatsword|75.00

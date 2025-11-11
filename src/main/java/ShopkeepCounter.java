@@ -59,14 +59,13 @@ public class ShopkeepCounter {
 
         while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3))) {
 
-            userInput = InputGetter.getInt("""
-                    \n
-                    \t1) Shortsword
-                    \t2) Longsword
-                    \t3) Greatsword
-                    
-                    What kind?
-                    """);
+
+            System.out.printf("\n\t1) Shortsword: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Shortsword"));
+            System.out.printf("\n\t2) Longsword: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Longsword"));
+            System.out.printf("\n\t3) Greatsword: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Greatsword"));
+
+
+            userInput = InputGetter.getInt("\n\nWhat kind?\n");
 
             switch (userInput) {
                 case 1 -> swordType = "Shortsword";
@@ -78,15 +77,12 @@ public class ShopkeepCounter {
         userInput = 0;
         while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4))) {
 
-            userInput = InputGetter.getInt("""
-                    \n
-                    \t1) Iron
-                    \t2) Steel
-                    \t3) Mithral
-                    \t4) Adamantine
-                    
-                    What material?
-                    """);
+            System.out.printf("\n\tIron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", swordType));
+            System.out.printf("\n\tSteel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", swordType));
+            System.out.printf("\n\tMithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", swordType));
+            System.out.printf("\n\tAdamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", swordType));
+
+            userInput = InputGetter.getInt("\n\nWhat material do you want?\n");
 
             switch (userInput) {
                 case 1 -> swordMaterial = "Iron";
@@ -100,7 +96,7 @@ public class ShopkeepCounter {
         while (!(userInput == 1) && (!(userInput == 2))) {
 
             userInput = InputGetter.getInt("""
-                    \n
+                    
                     \t1) Yes
                     \t2) No
                     
@@ -115,7 +111,7 @@ public class ShopkeepCounter {
             }
         }
 
-        Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", "Iron", swordType), swordMaterial, isInlaid, gemType, weaponType, swordType, recordKeeper);
+        Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", "Base", swordType), swordMaterial, isInlaid, gemType, weaponType, swordType, recordKeeper);
         System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", sword.getTotalPrice());
 
         userInput = 0;
