@@ -15,6 +15,10 @@ public class Axe extends MeleeWeapon {
         return this.material;
     }
 
+    public String getType() {
+        return this.axeType;
+    }
+
     @Override
     public double getBasePrice() {
         return this.basePrice;
@@ -23,5 +27,10 @@ public class Axe extends MeleeWeapon {
     @Override
     public double getTotalPrice() {
         return records.getReadPrice("Material", this.getMaterial(), this.axeType) + this.getBasePrice() + (isInlaid ? records.getReadPrice("Upgrade", this.gemType, "Inlay") : 0);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s made of %s with an inlay of %s, priced at: $%.2f", this.getType(), this.getMaterial(), this.getGemType(), this.getTotalPrice());
     }
 }

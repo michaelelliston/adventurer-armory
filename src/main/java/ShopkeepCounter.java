@@ -80,10 +80,10 @@ public class ShopkeepCounter {
                 userInput = 0;
                 while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4))) {
 
-                    System.out.printf("\n\tIron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", weaponSubType));
-                    System.out.printf("\n\tSteel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", weaponSubType));
-                    System.out.printf("\n\tMithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", weaponSubType));
-                    System.out.printf("\n\tAdamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", weaponSubType));
+                    System.out.printf("\n\t1) Iron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", weaponSubType));
+                    System.out.printf("\n\t2) Steel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", weaponSubType));
+                    System.out.printf("\n\t3) Mithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", weaponSubType));
+                    System.out.printf("\n\t4) Adamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", weaponSubType));
 
                     userInput = InputGetter.getInt("\n\nWhat material do you want?\n");
 
@@ -114,7 +114,7 @@ public class ShopkeepCounter {
                     }
                 }
 
-                Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", weaponMaterial, weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
+                Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", "Base", weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
                 System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", sword.getTotalPrice());
 
                 userInput = 0;
@@ -156,10 +156,10 @@ public class ShopkeepCounter {
                 userInput = 0;
                 while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4))) {
 
-                    System.out.printf("\n\tIron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", weaponSubType));
-                    System.out.printf("\n\tSteel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", weaponSubType));
-                    System.out.printf("\n\tMithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", weaponSubType));
-                    System.out.printf("\n\tAdamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", weaponSubType));
+                    System.out.printf("\n\t1) Iron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", weaponSubType));
+                    System.out.printf("\n\t2) Steel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", weaponSubType));
+                    System.out.printf("\n\t3) Mithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", weaponSubType));
+                    System.out.printf("\n\t4) Adamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", weaponSubType));
 
                     userInput = InputGetter.getInt("\n\nWhat material do you want?\n");
 
@@ -190,7 +190,7 @@ public class ShopkeepCounter {
                     }
                 }
 
-                Axe axe= new Axe(recordKeeper.getReadPrice("Weapon", weaponMaterial, weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
+                Axe axe= new Axe(recordKeeper.getReadPrice("Weapon", "Base", weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
                 System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", axe.getTotalPrice());
 
                 userInput = 0;
@@ -233,10 +233,10 @@ public class ShopkeepCounter {
                 userInput = 0;
                 while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4))) {
 
-                    System.out.printf("\n\tIron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", weaponSubType));
-                    System.out.printf("\n\tSteel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", weaponSubType));
-                    System.out.printf("\n\tMithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", weaponSubType));
-                    System.out.printf("\n\tAdamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", weaponSubType));
+                    System.out.printf("\n\t1) Iron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", weaponSubType));
+                    System.out.printf("\n\t2) Steel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", weaponSubType));
+                    System.out.printf("\n\t3) Mithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", weaponSubType));
+                    System.out.printf("\n\t4) Adamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", weaponSubType));
 
                     userInput = InputGetter.getInt("\n\nWhat material do you want?\n");
 
@@ -267,7 +267,7 @@ public class ShopkeepCounter {
                     }
                 }
 
-                Mace mace = new Mace(recordKeeper.getReadPrice("Weapon", weaponMaterial, weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
+                Mace mace = new Mace(recordKeeper.getReadPrice("Weapon", "Base", weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
                 System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", mace.getTotalPrice());
 
                 userInput = 0;
