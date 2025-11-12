@@ -1,6 +1,6 @@
 public abstract class MeleeWeapon extends Weapon {
     // TODO: Create fields for MeleeWeapon
-    protected String gemType = "None";
+    protected String gemType;
     protected boolean isInlaid;
 
     public MeleeWeapon(double basePrice, String material,boolean isInlaid, String gemType) {

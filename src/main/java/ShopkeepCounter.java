@@ -44,8 +44,170 @@ public class ShopkeepCounter {
 
     private void processCheckOrderRequest() {
         currentOrder.displayItemsInOrder();
-        InputGetter.getString("\n Wake me up when you're ready to continue... Zzzzz...");
+        InputGetter.getString("\n Wake me up when you're ready to continue... Zzzzz...\n");
         openShop();
+    }
+
+    private void processWeaponCreationRequest(String weaponType) {
+        String weaponMaterial = "";
+        String weaponSubType = "";
+        String gemType = "";
+        boolean isInlaid = false;
+        int userInput = 0;
+
+        switch (weaponType) {
+            case "Sword" -> {
+                while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3))) {
+
+
+                    System.out.printf("\n\t1) Shortsword: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Shortsword"));
+                    System.out.printf("\n\t2) Longsword: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Longsword"));
+                    System.out.printf("\n\t3) Greatsword: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Greatsword"));
+
+
+                    userInput = InputGetter.getInt("\n\nWhat kind?\n");
+
+                    switch (userInput) {
+                        case 1 -> weaponSubType = "Shortsword";
+                        case 2 -> weaponSubType = "Longsword";
+                        case 3 -> weaponSubType = "Greatsword";
+                    }
+                }
+
+                userInput = 0;
+                while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4))) {
+
+                    System.out.printf("\n\tIron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", weaponSubType));
+                    System.out.printf("\n\tSteel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", weaponSubType));
+                    System.out.printf("\n\tMithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", weaponSubType));
+                    System.out.printf("\n\tAdamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", weaponSubType));
+
+                    userInput = InputGetter.getInt("\n\nWhat material do you want?\n");
+
+                    switch (userInput) {
+                        case 1 -> weaponMaterial = "Iron";
+                        case 2 -> weaponMaterial = "Steel";
+                        case 3 -> weaponMaterial = "Mithral";
+                        case 4 -> weaponMaterial = "Adamantine";
+                    }
+                }
+
+                userInput = 0;
+                while (!(userInput == 1) && (!(userInput == 2))) {
+
+                    userInput = InputGetter.getInt("""
+                            
+                            \t1) Yes
+                            \t2) No
+                            
+                            Want a gem inlaid into it?
+                            """);
+
+                    if (userInput == 1) {
+                        isInlaid = true;
+                        gemType = processGemInlayRequest();
+                    } else {
+                        gemType = "None";
+                    }
+                }
+
+                Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", weaponMaterial, weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
+                System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", sword.getTotalPrice());
+
+                userInput = 0;
+                while (!(userInput == 1) && (!(userInput == 99))) {
+                    userInput = InputGetter.getInt("""
+                            \n
+                            1) Yes
+                            99) No
+                            """);
+
+                    switch (userInput) {
+                        case 1 -> {
+                            currentOrder.addPurchase(sword);
+                            openShop();
+                        }
+                        case 99 -> openShop();
+                    }
+                }
+            }
+
+            case "Axe" -> {
+                while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3))) {
+
+
+                    System.out.printf("\n\t1) Hatchet: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Hatchet"));
+                    System.out.printf("\n\t2) Broadaxe: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Broadaxe"));
+                    System.out.printf("\n\t3) Greataxe: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Greataxe"));
+
+
+                    userInput = InputGetter.getInt("\n\nWhat kind?\n");
+
+                    switch (userInput) {
+                        case 1 -> weaponSubType = "Hatchet";
+                        case 2 -> weaponSubType = "Broadaxe";
+                        case 3 -> weaponSubType = "Greataxe";
+                    }
+                }
+
+                userInput = 0;
+                while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4))) {
+
+                    System.out.printf("\n\tIron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", weaponSubType));
+                    System.out.printf("\n\tSteel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", weaponSubType));
+                    System.out.printf("\n\tMithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", weaponSubType));
+                    System.out.printf("\n\tAdamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", weaponSubType));
+
+                    userInput = InputGetter.getInt("\n\nWhat material do you want?\n");
+
+                    switch (userInput) {
+                        case 1 -> weaponMaterial = "Iron";
+                        case 2 -> weaponMaterial = "Steel";
+                        case 3 -> weaponMaterial = "Mithral";
+                        case 4 -> weaponMaterial = "Adamantine";
+                    }
+                }
+
+                userInput = 0;
+                while (!(userInput == 1) && (!(userInput == 2))) {
+
+                    userInput = InputGetter.getInt("""
+                            
+                            \t1) Yes
+                            \t2) No
+                            
+                            Want a gem inlaid into it?
+                            """);
+
+                    if (userInput == 1) {
+                        isInlaid = true;
+                        gemType = processGemInlayRequest();
+                    } else {
+                        gemType = "None";
+                    }
+                }
+
+                Axe axe= new Axe(recordKeeper.getReadPrice("Weapon", weaponMaterial, weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
+                System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", axe.getTotalPrice());
+
+                userInput = 0;
+                while (!(userInput == 1) && (!(userInput == 99))) {
+                    userInput = InputGetter.getInt("""
+                            \n
+                            1) Yes
+                            99) No
+                            """);
+
+                    switch (userInput) {
+                        case 1 -> {
+                            currentOrder.addPurchase(axe);
+                            openShop();
+                        }
+                        case 99 -> openShop();
+                    }
+                }
+            }
+        }
     }
 
     private void processSwordCreationRequest() {

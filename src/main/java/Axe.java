@@ -1,10 +1,12 @@
 public class Axe extends MeleeWeapon {
 
     protected String axeType;
+    protected String weaponType;
     protected RecordKeeper records;
 
-    public Axe(double basePrice, String material, boolean isInlaid, String gemType, String axeType, RecordKeeper records) {
+    public Axe(double basePrice, String material, boolean isInlaid, String gemType, String weaponType, String axeType, RecordKeeper records) {
         super(basePrice, material, isInlaid, gemType);
+        this.weaponType = weaponType;
         this.axeType = axeType;
         this.records = records;
     }
