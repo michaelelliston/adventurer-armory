@@ -1,5 +1,5 @@
 public abstract class MeleeWeapon extends Weapon {
-    // TODO: Create fields for MeleeWeapon
+
     protected String gemType;
     protected boolean isInlaid;
 

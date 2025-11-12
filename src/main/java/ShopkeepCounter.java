@@ -148,7 +148,8 @@ public class ShopkeepCounter {
                     }
                 }
 
-                Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", "Base", weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
+                Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", "Base",
+                        weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
                 System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", sword.getTotalPrice());
 
                 userInput = 0;

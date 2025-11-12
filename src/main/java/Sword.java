@@ -23,7 +23,6 @@ public class Sword extends MeleeWeapon {
         return this.swordType;
     }
 
-
     @Override
     public double getBasePrice() {
         return this.basePrice;
