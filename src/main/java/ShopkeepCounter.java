@@ -21,7 +21,7 @@ public class ShopkeepCounter {
     public void openShop() {
 
         int userInput = 0;
-        while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 8)) && (!(userInput == 88)) && (!(userInput == 99))) {
+        while (!(userInput == 99)) {
             userInput = InputGetter.getInt("""
                     \n
                     \t1) Sword
@@ -35,16 +35,24 @@ public class ShopkeepCounter {
                     """);
 
             switch (userInput) {
-                case 1 -> processWeaponCreationRequest("Sword");
-                case 2 -> processWeaponCreationRequest("Axe");
-                case 3 -> processWeaponCreationRequest("Mace");
-                case 8 -> processDisplayOrderRequest();
+                case 1 -> {
+                    processWeaponCreationRequest("Sword");
+                }
+                case 2 -> {
+                    processWeaponCreationRequest("Axe");
+                }
+                case 3 -> {
+                    processWeaponCreationRequest("Mace");
+                }
+                case 8 -> {
+                    processDisplayOrderRequest();
+                }
                 case 88 -> {
-                    if (!currentOrder.getAllItemsInOrder().isEmpty())
+                    if (!currentOrder.getAllItemsInOrder().isEmpty()) {
                         processOrderCheckoutRequest();
+                    }
                     else {
                         System.out.println("\nYou've got nothing in your order currently.");
-                        openShop();
                     }
                 }
             }
@@ -56,14 +64,13 @@ public class ShopkeepCounter {
         currentOrder.displayItemsInOrder();
         System.out.printf("Your order comes to a total of: $%.2f", currentOrder.getTotalPrice());
         InputGetter.getString("\n Wake me up when you're ready to continue... Zzzzz...\n");
-        openShop();
     }
 
     private void processOrderCheckoutRequest() {
         currentOrder.displayItemsInOrder();
-        System.out.printf("Your order comes to a total of: $%.2f\n", currentOrder.getTotalPrice());
+        System.out.printf("\nYour order comes to a total of: $%.2f\n", currentOrder.getTotalPrice());
         int userInput = 0;
-        while (!(userInput == 1) && (!(userInput == 2))) {
+        while (!(userInput == 2)) {
             userInput = InputGetter.getInt("""
                     \n
                     \t1) Yes
@@ -74,7 +81,7 @@ public class ShopkeepCounter {
 
             switch (userInput) {
 //                case 1 -> recordKeeper.writeReceipt(currentOrder);
-                case 2 -> openShop();
+
             }
         }
 
@@ -121,6 +128,7 @@ public class ShopkeepCounter {
                         case 2 -> weaponMaterial = "Steel";
                         case 3 -> weaponMaterial = "Mithral";
                         case 4 -> weaponMaterial = "Adamantine";
+                        default -> System.out.println("Invalid selection, try again.");
                     }
                 }
 
@@ -138,8 +146,10 @@ public class ShopkeepCounter {
                     if (userInput == 1) {
                         isInlaid = true;
                         gemType = processGemInlayRequest();
-                    } else {
+                    } else if (userInput == 2) {
                         gemType = "None";
+                    } else {
+                        System.out.println("Invalid selection, try again.");
                     }
                 }
 
@@ -154,12 +164,8 @@ public class ShopkeepCounter {
                             99) No
                             """);
 
-                    switch (userInput) {
-                        case 1 -> {
-                            currentOrder.addPurchase(sword);
-                            openShop();
-                        }
-                        case 99 -> openShop();
+                    if (userInput == 1) {
+                        currentOrder.addPurchase(sword);
                     }
                 }
             }
@@ -214,8 +220,10 @@ public class ShopkeepCounter {
                     if (userInput == 1) {
                         isInlaid = true;
                         gemType = processGemInlayRequest();
-                    } else {
+                    } else if (userInput == 2) {
                         gemType = "None";
+                    } else {
+                        System.out.println("Invalid selection, try again.");
                     }
                 }
 
@@ -230,12 +238,8 @@ public class ShopkeepCounter {
                             99) No
                             """);
 
-                    switch (userInput) {
-                        case 1 -> {
-                            currentOrder.addPurchase(axe);
-                            openShop();
-                        }
-                        case 99 -> openShop();
+                    if (userInput == 1) {
+                        currentOrder.addPurchase(axe);
                     }
                 }
             }
@@ -291,8 +295,10 @@ public class ShopkeepCounter {
                     if (userInput == 1) {
                         isInlaid = true;
                         gemType = processGemInlayRequest();
-                    } else {
+                    } else if (userInput == 2) {
                         gemType = "None";
+                    } else {
+                        System.out.println("Invalid selection, try again.");
                     }
                 }
 
@@ -307,12 +313,8 @@ public class ShopkeepCounter {
                             99) No
                             """);
 
-                    switch (userInput) {
-                        case 1 -> {
-                            currentOrder.addPurchase(mace);
-                            openShop();
-                        }
-                        case 99 -> openShop();
+                    if (userInput == 1) {
+                        currentOrder.addPurchase(mace);
                     }
                 }
 
