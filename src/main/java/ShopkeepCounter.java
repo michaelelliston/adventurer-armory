@@ -10,7 +10,7 @@ public class ShopkeepCounter {
 
     public void greetCustomer() {
         String userName = InputGetter.getString("What's your name?\n");
-//        int orderNumber = recordKeeper.getOrderNumber();
+//        int orderNumber = recordKeeper.getOrderNumber(); TODO: Create method to obtain current order number
         int orderNumber = 73;
         currentOrder = new Order(userName, orderNumber);
         startRecordKeeper();
@@ -35,18 +35,10 @@ public class ShopkeepCounter {
                     """);
 
             switch (userInput) {
-                case 1 -> {
-                    processWeaponCreationRequest("Sword");
-                }
-                case 2 -> {
-                    processWeaponCreationRequest("Axe");
-                }
-                case 3 -> {
-                    processWeaponCreationRequest("Mace");
-                }
-                case 8 -> {
-                    processDisplayOrderRequest();
-                }
+                case 1 -> processWeaponCreationRequest("Sword");
+                case 2 -> processWeaponCreationRequest("Axe");
+                case 3 -> processWeaponCreationRequest("Mace");
+                case 8 -> processDisplayOrderRequest();
                 case 88 -> {
                     if (!currentOrder.getAllItemsInOrder().isEmpty()) {
                         processOrderCheckoutRequest();
@@ -81,12 +73,11 @@ public class ShopkeepCounter {
                     """);
 
             switch (userInput) {
-//                case 1 -> recordKeeper.writeReceipt(currentOrder);
+//                case 1 -> recordKeeper.writeReceipt(currentOrder); // TODO: Create a method to write a Receipt file with date/time as the file name
                 default -> System.out.println("Invalid selection, try again.");
 
             }
         }
-
     }
 
     private void processWeaponCreationRequest(String weaponType) {
