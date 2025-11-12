@@ -6,30 +6,45 @@ Weapon|Base|Greatsword|230.00
 Weapon|Base|Hatchet|50.00
 Weapon|Base|Broadaxe|90.00
 Weapon|Base|Greataxe|150.00
+Weapon|Base|Battle Mace|65.00
+Weapon|Base|Warhammer|105.00
+Weapon|Base|Maul|195.00
 Material|Iron|Shortsword|00.00
 Material|Iron|Longsword|00.00
 Material|Iron|Greatsword|00.00
 Material|Iron|Hatchet|00.00
 Material|Iron|Broadaxe|00.00
 Material|Iron|Greataxe|00.00
+Material|Iron|Battle Mace|00.00
+Material|Iron|Warhammer|00.00
+Material|Iron|Maul|00.00
 Material|Steel|Shortsword|30.00
 Material|Steel|Longsword|40.00
 Material|Steel|Greatsword|75.00
 Material|Steel|Hatchet|20.00
 Material|Steel|Broadaxe|35.00
 Material|Steel|Greataxe|60.00
+Material|Steel|Battle Mace|25.00
+Material|Steel|Warhammer|37.00
+Material|Steel|Maul|70.00
 Material|Mithral|Shortsword|60.00
 Material|Mithral|Longsword|80.00
 Material|Mithral|Greatsword|150.00
 Material|Mithral|Hatchet|40.00
 Material|Mithral|Broadaxe|70.00
 Material|Mithral|Greataxe|120.00
+Material|Mithral|Battle Mace|55.00
+Material|Mithral|Warhammer|74.00
+Material|Mithral|Maul|140.00
 Material|Adamantine|Shortsword|120.00
 Material|Adamantine|Longsword|160.00
 Material|Adamantine|Greatsword|300.00
 Material|Adamantine|Hatchet|80.00
 Material|Adamantine|Broadaxe|140.00
 Material|Adamantine|Greataxe|240.00
+Material|Adamantine|Battle Mace|110.00
+Material|Adamantine|Warhammer|148.00
+Material|Adamantine|Maul|280.00
 Upgrade|Amethyst|Inlay|100.00
 Upgrade|Garnet|Inlay|120.00
 Upgrade|Emerald|Inlay|130.00

@@ -25,11 +25,12 @@ public class ShopkeepCounter {
         startRecordKeeper();
 
         int userInput = 0;
-        while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 8)) && (!(userInput == 99)))
+        while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 8)) && (!(userInput == 99)))
             userInput = InputGetter.getInt("""
                     \n
                     \t1) Sword
                     \t2) Axe
+                    \t3) Mace
                     \t8) Check Order
                     \t99) Leave
                     
@@ -37,7 +38,9 @@ public class ShopkeepCounter {
                     """);
 
         switch (userInput) {
-            case 1 -> processSwordCreationRequest();
+            case 1 -> processWeaponCreationRequest("Sword");
+            case 2 -> processWeaponCreationRequest("Axe");
+            case 3 -> processWeaponCreationRequest("Mace");
             case 8 -> processCheckOrderRequest();
         }
     }
@@ -206,6 +209,84 @@ public class ShopkeepCounter {
                         case 99 -> openShop();
                     }
                 }
+            }
+
+            case "Mace" -> {
+
+                while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3))) {
+
+
+                    System.out.printf("\n\t1) Battle Mace: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Battle Mace"));
+                    System.out.printf("\n\t2) Warhammer: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Warhammer"));
+                    System.out.printf("\n\t3) Maul: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Maul"));
+
+
+                    userInput = InputGetter.getInt("\n\nWhat kind?\n");
+
+                    switch (userInput) {
+                        case 1 -> weaponSubType = "Battle Mace";
+                        case 2 -> weaponSubType = "Warhammer";
+                        case 3 -> weaponSubType = "Maul";
+                    }
+                }
+
+                userInput = 0;
+                while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4))) {
+
+                    System.out.printf("\n\tIron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", weaponSubType));
+                    System.out.printf("\n\tSteel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", weaponSubType));
+                    System.out.printf("\n\tMithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", weaponSubType));
+                    System.out.printf("\n\tAdamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", weaponSubType));
+
+                    userInput = InputGetter.getInt("\n\nWhat material do you want?\n");
+
+                    switch (userInput) {
+                        case 1 -> weaponMaterial = "Iron";
+                        case 2 -> weaponMaterial = "Steel";
+                        case 3 -> weaponMaterial = "Mithral";
+                        case 4 -> weaponMaterial = "Adamantine";
+                    }
+                }
+
+                userInput = 0;
+                while (!(userInput == 1) && (!(userInput == 2))) {
+
+                    userInput = InputGetter.getInt("""
+                            
+                            \t1) Yes
+                            \t2) No
+                            
+                            Want a gem inlaid into it?
+                            """);
+
+                    if (userInput == 1) {
+                        isInlaid = true;
+                        gemType = processGemInlayRequest();
+                    } else {
+                        gemType = "None";
+                    }
+                }
+
+                Mace mace = new Mace(recordKeeper.getReadPrice("Weapon", weaponMaterial, weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
+                System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", mace.getTotalPrice());
+
+                userInput = 0;
+                while (!(userInput == 1) && (!(userInput == 99))) {
+                    userInput = InputGetter.getInt("""
+                            \n
+                            1) Yes
+                            99) No
+                            """);
+
+                    switch (userInput) {
+                        case 1 -> {
+                            currentOrder.addPurchase(mace);
+                            openShop();
+                        }
+                        case 99 -> openShop();
+                    }
+                }
+
             }
         }
     }
