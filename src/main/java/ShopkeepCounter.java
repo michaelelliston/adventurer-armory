@@ -1,12 +1,8 @@
 import utilities.InputGetter;
 
 public class ShopkeepCounter {
-    private RecordKeeper recordKeeper = new RecordKeeper();
+    private final RecordKeeper recordKeeper = new RecordKeeper();
     private Order currentOrder; // After an order is completed, if another order is created, make sure to start a fresh order
-
-    public ShopkeepCounter() {
-
-    }
 
     private void startRecordKeeper() {
         recordKeeper.readPricesFromRecords();
@@ -17,38 +13,71 @@ public class ShopkeepCounter {
 //        int orderNumber = recordKeeper.getOrderNumber();
         int orderNumber = 73;
         currentOrder = new Order(userName, orderNumber);
+        startRecordKeeper();
         openShop();
     }
 
     // Begin prompting user for input from selections
     public void openShop() {
-        startRecordKeeper();
 
         int userInput = 0;
-        while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 8)) && (!(userInput == 99)))
+        while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 8)) && (!(userInput == 88)) && (!(userInput == 99))) {
             userInput = InputGetter.getInt("""
                     \n
                     \t1) Sword
                     \t2) Axe
                     \t3) Mace
-                    \t8) Check Order
+                    \t8) Display Current Order
+                    \t88) Checkout
                     \t99) Leave
                     
                     What do you want?
                     """);
 
-        switch (userInput) {
-            case 1 -> processWeaponCreationRequest("Sword");
-            case 2 -> processWeaponCreationRequest("Axe");
-            case 3 -> processWeaponCreationRequest("Mace");
-            case 8 -> processCheckOrderRequest();
+            switch (userInput) {
+                case 1 -> processWeaponCreationRequest("Sword");
+                case 2 -> processWeaponCreationRequest("Axe");
+                case 3 -> processWeaponCreationRequest("Mace");
+                case 8 -> processDisplayOrderRequest();
+                case 88 -> {
+                    if (!currentOrder.getAllItemsInOrder().isEmpty())
+                        processOrderCheckoutRequest();
+                    else {
+                        System.out.println("\nYou've got nothing in your order currently.");
+                        openShop();
+                    }
+                }
+            }
         }
     }
 
-    private void processCheckOrderRequest() {
+    private void processDisplayOrderRequest() {
+        System.out.println();
         currentOrder.displayItemsInOrder();
+        System.out.printf("Your order comes to a total of: $%.2f", currentOrder.getTotalPrice());
         InputGetter.getString("\n Wake me up when you're ready to continue... Zzzzz...\n");
         openShop();
+    }
+
+    private void processOrderCheckoutRequest() {
+        currentOrder.displayItemsInOrder();
+        System.out.printf("Your order comes to a total of: $%.2f\n", currentOrder.getTotalPrice());
+        int userInput = 0;
+        while (!(userInput == 1) && (!(userInput == 2))) {
+            userInput = InputGetter.getInt("""
+                    \n
+                    \t1) Yes
+                    \t2) No
+                    
+                    Do you accept this transaction?
+                    """);
+
+            switch (userInput) {
+//                case 1 -> recordKeeper.writeReceipt(currentOrder);
+                case 2 -> openShop();
+            }
+        }
+
     }
 
     private void processWeaponCreationRequest(String weaponType) {
@@ -190,7 +219,7 @@ public class ShopkeepCounter {
                     }
                 }
 
-                Axe axe= new Axe(recordKeeper.getReadPrice("Weapon", "Base", weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
+                Axe axe = new Axe(recordKeeper.getReadPrice("Weapon", "Base", weaponSubType), weaponMaterial, isInlaid, gemType, weaponType, weaponSubType, recordKeeper);
                 System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", axe.getTotalPrice());
 
                 userInput = 0;
@@ -287,90 +316,6 @@ public class ShopkeepCounter {
                     }
                 }
 
-            }
-        }
-    }
-
-    private void processSwordCreationRequest() {
-
-        String weaponType = "Sword";
-        String swordMaterial = "";
-        String swordType = "";
-        String gemType = "";
-        boolean isInlaid = false;
-        int userInput = 0;
-
-        while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3))) {
-
-
-            System.out.printf("\n\t1) Shortsword: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Shortsword"));
-            System.out.printf("\n\t2) Longsword: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Longsword"));
-            System.out.printf("\n\t3) Greatsword: Base price of $%.2f", recordKeeper.getReadPrice("Weapon", "Base", "Greatsword"));
-
-
-            userInput = InputGetter.getInt("\n\nWhat kind?\n");
-
-            switch (userInput) {
-                case 1 -> swordType = "Shortsword";
-                case 2 -> swordType = "Longsword";
-                case 3 -> swordType = "Greatsword";
-            }
-        }
-
-        userInput = 0;
-        while (!(userInput == 1) && (!(userInput == 2)) && (!(userInput == 3)) && (!(userInput == 4))) {
-
-            System.out.printf("\n\tIron: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Iron", swordType));
-            System.out.printf("\n\tSteel: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Steel", swordType));
-            System.out.printf("\n\tMithral: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Mithral", swordType));
-            System.out.printf("\n\tAdamantine: Additional fee of $%.2f", recordKeeper.getReadPrice("Material", "Adamantine", swordType));
-
-            userInput = InputGetter.getInt("\n\nWhat material do you want?\n");
-
-            switch (userInput) {
-                case 1 -> swordMaterial = "Iron";
-                case 2 -> swordMaterial = "Steel";
-                case 3 -> swordMaterial = "Mithral";
-                case 4 -> swordMaterial = "Adamantine";
-            }
-        }
-
-        userInput = 0;
-        while (!(userInput == 1) && (!(userInput == 2))) {
-
-            userInput = InputGetter.getInt("""
-                    
-                    \t1) Yes
-                    \t2) No
-                    
-                    Want a gem inlaid into it?
-                    """);
-
-            if (userInput == 1) {
-                isInlaid = true;
-                gemType = processGemInlayRequest();
-            } else {
-                gemType = "None";
-            }
-        }
-
-        Sword sword = new Sword(recordKeeper.getReadPrice("Weapon", "Base", swordType), swordMaterial, isInlaid, gemType, weaponType, swordType, recordKeeper);
-        System.out.printf("\nThis would cost you $%.2f, shall I add it to your order?", sword.getTotalPrice());
-
-        userInput = 0;
-        while (!(userInput == 1) && (!(userInput == 99))) {
-            userInput = InputGetter.getInt("""
-                    \n
-                    1) Yes
-                    99) No
-                    """);
-
-            switch (userInput) {
-                case 1 -> {
-                    currentOrder.addPurchase(sword);
-                    openShop();
-                }
-                case 99 -> openShop();
             }
         }
     }

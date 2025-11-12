@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class RecordKeeper {
 
     private final String pricesFileName = "src/main/resources/prices.csv";
-    private final String recordsFileName = "src/main/resources/records.json";
+    private final String receiptsFilePath = "src/main/resources/receipts";
     private HashMap<String, Double> itemPrices;
 
     public void readPricesFromRecords() {
