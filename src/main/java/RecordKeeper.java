@@ -8,7 +8,8 @@ public class RecordKeeper {
 
     private final static String PRICES_FILE_PATH = "src/main/resources/prices.csv";
     private final static String RECEIPTS_FILE_PATH = "src/main/resources/receipts/";
-    private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-d-MM_HHmmss");
+    private final static DateTimeFormatter FILE_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-d-MM_HHmmss");
+    private final static DateTimeFormatter RECEIPT_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-d-MM HH:mm:ss");
     private HashMap<String, Double> itemPrices;
 
     public void readPricesFromRecords() {
@@ -54,16 +55,19 @@ public class RecordKeeper {
     public void writeReceipt(Order order) {
 
         LocalDateTime currentDateTime = LocalDateTime.now();
-        String formattedDateTime = currentDateTime.format(DATE_TIME_FORMATTER);
+        String formattedFileDateTime = currentDateTime.format(FILE_DATE_TIME_FORMATTER);
+        String formattedWrittenDateTime = currentDateTime.format(RECEIPT_DATE_TIME_FORMATTER);
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(RECEIPTS_FILE_PATH + formattedDateTime + ".csv"))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(RECEIPTS_FILE_PATH + formattedFileDateTime + ".csv"))) {
 
             ArrayList<Priceable> currentOrder = order.getAllItemsInOrder();
 
             String customerName = order.getCustomerName();
             int orderNumber = order.getOrderNumber();
 
-            writer.write("\n\t" + customerName + "\n");
+            writer.printf("\n\tAdventurer Armory Purchase: %s", formattedWrittenDateTime);
+
+            writer.printf("\n\tOrder for: %s\n", customerName);
             writer.printf("\tOrder ID: %d\n\n", orderNumber);
 
             for (Priceable item : currentOrder) {

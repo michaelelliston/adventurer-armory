@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Order {
     private final String customerName;
-    private final int orderNumber;
+    private int orderNumber;
     private final ArrayList<Priceable> purchases = new ArrayList<>();
 
     public Order(String customerName, int orderNumber) {
@@ -22,6 +22,11 @@ public class Order {
 
     public String getCustomerName() {
         return this.customerName;
+    }
+
+    public void startNewOrder() {
+        purchases.clear();
+        this.orderNumber = this.orderNumber + 1;
     }
 
     public ArrayList<Priceable> getAllItemsInOrder() {

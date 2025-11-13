@@ -93,7 +93,11 @@ public class ShopkeepCounter {
                     """);
 
             switch (userInput) {
-                case 1 -> recordKeeper.writeReceipt(currentOrder);
+                case 1 -> {
+                    recordKeeper.writeReceipt(currentOrder);
+                    currentOrder.startNewOrder();
+                    System.out.println("Thanks for your business.");
+                }
                 case 2 -> System.out.println("\nRight, lets put a hold on that.");
                 default -> System.out.println("\nInvalid selection, try again.");
 
