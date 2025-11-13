@@ -26,7 +26,8 @@ public class Sword extends MeleeWeapon {
 
     @Override
     public double getTotalPrice() {
-        return records.getReadPrice("Material", this.getMaterial(), this.swordType) + this.getBasePrice() + (isInlaid ? records.getReadPrice("Upgrade", this.gemType, "Inlay") : 0);
+        return records.getReadPrice("Material", this.getMaterial(), this.swordType)
+                + this.getBasePrice() + (isInlaid ? records.getReadPrice("Upgrade", this.gemType, "Inlay") : 0);
     }
 
     @Override

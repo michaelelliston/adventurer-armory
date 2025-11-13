@@ -74,14 +74,14 @@ public class ShopkeepCounter {
     private void processDisplayOrderRequest() {
         System.out.println();
         currentOrder.displayItemsInOrder();
-        System.out.printf("\nYour order comes to a total of: $%.2f", currentOrder.getTotalPrice());
+        System.out.printf("\nYour order comes to a total of: $%.2f", currentOrder.getOrderPrice());
         InputGetter.getString("\n\n\tWake me up when you're ready to continue... Zzzzz...\n");
     }
 
     private void processOrderCheckoutRequest() {
         System.out.println();
         currentOrder.displayItemsInOrder();
-        System.out.printf("\nYour order comes to a total of: $%.2f\n", currentOrder.getTotalPrice());
+        System.out.printf("\nYour order comes to a total of: $%.2f\n", currentOrder.getOrderPrice());
         int userInput = 0;
         while (!(userInput == 2) && !(userInput == 1)) {
             userInput = InputGetter.getInt("""

@@ -14,7 +14,7 @@ public class Order {
         purchases.add(purchase);
     }
 
-    public double getTotalPrice() {
+    public double getOrderPrice() {
         return purchases.stream()
                 .mapToDouble(Priceable::getTotalPrice)
                 .sum();

@@ -103,7 +103,7 @@ public class RecordKeeper {
                 }
             }
 
-            writer.printf("\t\tTotal: $%.2f", order.getTotalPrice());
+            writer.printf("\t\tTotal: $%.2f", order.getOrderPrice());
 
 
         } catch (IOException e) {
