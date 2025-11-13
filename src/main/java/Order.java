@@ -38,9 +38,8 @@ public class Order {
     }
 
     public void displayItemsInOrder() {
-        for (Priceable item : purchases) {
-            System.out.println(item);
-        }
+        purchases.stream()
+                .forEach(System.out::println);
     }
 }
 
