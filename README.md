@@ -31,8 +31,20 @@ public static int getInt(String prompt) {
 * Optionally can inlay one of various Gemstones into each weapon.<br>
 ![armoryOrderExample.png](src/main/resources/readme-images/armoryOrderExample.png)
 * Structured to scale easily for future additions, such as Bows, Wands, Armor, etc.
-* Handles dynamic pricing by storing information read from a pricing catalog file into a HashMap.
-* Creates and stores a receipt after the user decides to check out their order.
+* Handles dynamic pricing by storing information read from a pricing catalog file into a HashMap.<br>
+![armoryCreateHashMapExample.png](src/main/resources/readme-images/armoryCreateHashMapExample.png)
+* Each object has a getTotalPrice method implemented by the Priceable interface, and reads from the loaded HashMap passed in by the Constructor.<br>
+![armoryFetchHashMapValueExample.png](src/main/resources/readme-images/armoryFetchHashMapValueExample.png)
+* Easily calculates an Order's total price by summing up their individual values.
+```java
+public double getOrderPrice() {
+    return purchases.stream()
+            .mapToDouble(Priceable::getTotalPrice)
+            .sum();
+}
+```
+* Creates and stores a receipt after the user decides to check out their order.<br>
+![armoryReceiptExample.png](src/main/resources/readme-images/armoryReceiptExample.png)
 * Automatically assigns Order Number based on number of stored receipts.<br>
 ```java
 public int getOrderNumber() {
@@ -41,3 +53,11 @@ public int getOrderNumber() {
         return (receipts == null) ? 1 : receipts.length + 1;
     }
 ```
+## TL;DR, how does it work?<br>
+1. Prompt user for weapon type and customizations, and creates the corresponding object.
+2. Menus loop until appropriate input is given, and the user chooses to exit.
+3. Display pricing and add each created weapon object into their order.
+4. Calculate total price when requested or upon checking out their order.
+5. Writes and stores a receipt for each order, with an accurate order number that scales with each purchase.
+
+
