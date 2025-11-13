@@ -1,10 +1,10 @@
-<h1 style="text-align:center;">⚔️ Adventurer Armory ⚔️</h1>
-<h4 style="text-align:center;">Customizable weapon shop written in Java.</h4>
+<h1 align="center">⚔️ Adventurer Armory ⚔️</h1>
+<h4 align="center">Customizable weapon shop written in Java.</h4>
 
 
 
 
-<div style="text-align:center;">
+<div align="center">
 <img src="src/main/resources/readme-images/armoryWelcome.png" width="510" alt="Opening Menu"/></div>
 
 
